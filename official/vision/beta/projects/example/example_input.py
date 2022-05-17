@@ -61,8 +61,7 @@ class Decoder(decoder.Decoder):
     Returns:
       A dictionary of field key name and decoded tensor mapping.
     """
-    return tf.io.parse_single_example(
-        serialized_example, self._keys_to_features)
+    return serialized_example
 
 
 class Parser(parser.Parser):
@@ -93,9 +92,8 @@ class Parser(parser.Parser):
   def _parse_data(
       self, decoded_tensors: Mapping[str,
                                      tf.Tensor]) -> Tuple[tf.Tensor, tf.Tensor]:
-    label = tf.cast(decoded_tensors['image/class/label'], dtype=tf.int32)
-    image_bytes = decoded_tensors['image/encoded']
-    image = tf.io.decode_jpeg(image_bytes, channels=3)
+    label = tf.cast(decoded_tensors['label'], dtype=tf.int32)
+    image = decoded_tensors['image']
     image = tf.image.resize(
         image, self._output_size, method=tf.image.ResizeMethod.BILINEAR)
     image = tf.ensure_shape(image, self._output_size + [3])

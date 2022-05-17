@@ -1,20 +1,32 @@
+runtime:
+  num_gpus: 1  # activated GPU support
 task:
   model:
     num_classes: 1001
     input_size: [128, 128, 3]
   train_data:
-    input_path: 'imagenet-2012-tfrecord/train*'
+    input_path: ''  # switched to cifar10 using TFDS (see below) instead of ImageNet
     is_training: true
     global_batch_size: 64
     dtype: 'bfloat16'
+    tfds_name: 'cifar10'
+    # tfds_as_supervised: False
+    tfds_data_dir: '/data'
+    tfds_split: 'train'
+    tfds_skip_decoding_feature: False
+    shuffle_buffer_size: 10000
   validation_data:
-    input_path: 'imagenet-2012-tfrecord/valid*'
+    input_path: ''  # see above
     is_training: false
     global_batch_size: 64
     dtype: 'bfloat16'
+    tfds_name: 'cifar10'
+    # tfds_as_supervised: False
+    tfds_data_dir: '/data'
+    tfds_split: 'validation'
     drop_remainder: false
 trainer:
-  train_steps: 62400
+  train_steps: 500  # reduced training steps so that we don't have to wait hours for the experiment to finish
   validation_steps: 13
   validation_interval: 312
   steps_per_loop: 312
@@ -29,4 +41,4 @@ trainer:
       type: 'stepwise'
       stepwise:
         boundaries: [18750, 37500, 50000]
-        values: [0.1, 0.01, 0.001, 0.0001]
+        values: [0.01, 0.01, 0.001, 0.0001]  # changed 0.1 to 0.01 because lr=0.1 resulted in a NaN loss
