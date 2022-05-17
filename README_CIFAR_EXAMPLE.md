@@ -15,7 +15,7 @@ The fact that I changed the `decode` function in `example_input.py` like that is
    2. `CONFIG` refers to `/official/vision/beta/projects/example/example_config_local.yaml` you may want to copy the file to our `htcv22a_repo/configs/experiments/` first
 3. Run the `run.sh`
 4. You will see the output in `VOL_OUT`
-5. I always get this error
+5. I always get this error at the end. I THINK it is ok to ignore it for now.
    ```bash
    Exception ignored in: <function Pool.__del__ at 0x7f328c36b430>
    Traceback (most recent call last):
