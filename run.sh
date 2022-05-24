@@ -14,7 +14,7 @@ VOL_TFM="$HOME/Documents/uni/tf-model-garden/:/opt/tfm" # when mounting custom t
 WORKDIR='--workdir /wd'
 
 EXPERIMENT='tf_vision_example_experiment'
-CONFIG='/wd/configs/experiments/example_config_local.yaml'
+CONFIG='/wd/src/configs/experiments/example_config_local.yaml'
 MODE='train'
 OUTPUT_DIR='/out'
 
