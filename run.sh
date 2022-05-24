@@ -8,7 +8,7 @@ IMAGE='wllhf/tensorflow:htcv22a-v4'
 # directories need to exist and have your users permissions
 VOL_OUT="$HOME/Documents/uni/htcv22a/all_runs/example:/out"
 VOL_DAT="/shared/datasets/:/data"
-VOL_WOR="$HOME/Documents/uni/htcv22a/:/wd"
+VOL_WOR="$HOME/Documents/uni/htcv22a/src/:/wd"
 VOL_TFM="$HOME/Documents/uni/tf-model-garden/:/opt/tfm" # when mounting custom tfm repo add below -v $VOL_TFM
 
 WORKDIR='--workdir /wd'
